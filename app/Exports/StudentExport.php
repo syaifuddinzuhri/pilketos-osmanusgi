@@ -9,12 +9,18 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class StudentExport implements FromCollection, WithHeadings, WithMapping
 {
+
+    public function __construct(string $class)
+    {
+        $this->class = $class;
+    }
+
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return User::where('status', 'siswa')->get();
+        return User::where(['status' => 'siswa', 'class' => $this->class])->get();
     }
 
     public function headings(): array

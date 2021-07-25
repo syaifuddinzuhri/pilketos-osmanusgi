@@ -49,6 +49,6 @@ class User extends Authenticatable
 
     public function vote()
     {
-        return $this->hasMany(Vote::class, 'user_id', 'id');
+        return $this->hasMany(Vote::class);
     }
 }

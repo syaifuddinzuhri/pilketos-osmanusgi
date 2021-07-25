@@ -15,13 +15,12 @@ class Candidate extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->integer('order');
-            $table->string('name');
-            $table->string('class');
-            $table->string('major');
             $table->text('vision');
             $table->text('mision');
-            $table->string('photo');
+            $table->string('photo')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

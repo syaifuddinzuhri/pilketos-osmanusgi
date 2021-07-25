@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CandidateController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,15 +42,18 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::post('/master/import', [AdminController::class, 'import'])->name('master.import');
         // Route::resource('master', AdminController::class);
 
-        // Master Siswa
+        // Master Student
         Route::get('/student/export', [StudentController::class, 'export'])->name('student.export');
         Route::post('/student/import', [StudentController::class, 'import'])->name('student.import');
         Route::resource('student', StudentController::class);
 
-        // Master Siswa
+        // Master Teacher
         Route::get('/teacher/export', [TeacherController::class, 'export'])->name('teacher.export');
         Route::post('/teacher/import', [TeacherController::class, 'import'])->name('teacher.import');
         Route::resource('teacher', TeacherController::class);
+
+        // Master Candidate
+        Route::resource('candidate', CandidateController::class);
     });
 
     // User Routes

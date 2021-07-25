@@ -81,7 +81,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>*Unduh <a href="{{route('admin.student.export')}}">Format Excel</a></p>
+                    <p>*Unduh <a href="{{route('admin.student.export', ['class' => Request::get('class')])}}">Format Excel</a></p>
                     <form action="{{route('admin.student.import')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">

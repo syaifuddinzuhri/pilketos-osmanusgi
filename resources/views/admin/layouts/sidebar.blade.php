@@ -60,7 +60,7 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{route('admin.candidate.index')}}">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Data Kandidat</span></a>
             </li>

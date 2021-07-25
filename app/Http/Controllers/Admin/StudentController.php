@@ -126,10 +126,10 @@ class StudentController extends Controller
         return redirect()->back();
     }
 
-    public function export()
+    public function export(Request $request)
     {
         try {
-            return Excel::download(new StudentExport, 'siswa.xlsx');
+            return Excel::download(new StudentExport(strtoupper($request->class)), 'siswa.xlsx');
         } catch (\Throwable $th) {
             toast('Gagal mengunduh!', 'error');
             return redirect()->back();
