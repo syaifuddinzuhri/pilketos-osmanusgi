@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\AdminRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
@@ -21,12 +22,30 @@ class AuthController extends Controller
         $user = User::where('nisn', $request->nisn)->first();
         if ($user && !is_null($user->date_of_birth) && ($request->date_of_birth == $user->date_of_birth) && ($request->password == $user->password)) {
             if (Auth::loginUsingId($user->id)) {
-                $user = Auth::user();
                 toast('Kamu berhasil login!', 'success');
-                if ($user->role === 'usr') {
-                    return redirect()->route('user.dashboard');
+                return redirect()->route('user.dashboard');
+            }
+        }
+        return redirect()->route('auth.showLogin')->with('error', 'Login Gagal. Cek kembali NISN, Tanggal Lahir dan Password kamu');
+    }
+
+    public function adminShowLogin()
+    {
+        return view('admin.login');
+    }
+
+    public function adminLogin(AdminLoginRequest $request)
+    {
+        $user = User::where('nisn', $request->nisn)->first();
+        if ($user && ($request->password == $user->password)) {
+            if ($user->role == 'adm') {
+                if (Auth::loginUsingId($user->id)) {
+                    toast('Kamu berhasil login!', 'success');
+                    return redirect()->route('admin.dashboard');
                 }
-                return redirect()->route('admin.dashboard');
+            } else {
+                toast('Ooops. Kamu bukan admin!', 'error');
+                return redirect()->back();
             }
         }
         return redirect()->route('auth.showLogin')->with('error', 'Login Gagal. Cek kembali NISN, Tanggal Lahir dan Password kamu');
@@ -64,6 +83,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         toast('Kamu berhasil logout!', 'success');
-        return redirect()->route('auth.showLogin');
+        return redirect()->route('home.index');
     }
 }

@@ -25,6 +25,8 @@ Route::middleware(['guest'])->group(function () {
     // Auth
     Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.showLogin');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::get('/admin/login', [AuthController::class, 'adminShowLogin'])->name('auth.admin.showLogin');
+    Route::post('/admin/login', [AuthController::class, 'adminLogin'])->name('auth.admin.login');
 });
 
 Route::group(['middleware' => ['auth']], function () {
