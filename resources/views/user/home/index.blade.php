@@ -1,6 +1,9 @@
 @extends('user.layouts.main')
 
 @section('title', 'Home')
+@section('footer', 'bg-light text-dark')
+@section('navbar', 'navbar-light bg-light')
+@section('btnlogout', 'btn-outline-danger')
 
 @section('content')
 
@@ -12,9 +15,9 @@
             </div>
             <div class="col-md-6 text-light order-md-1">
                 <h1 class="display-4 fw-bold">Selamat Datang di</h1>
-                <h3>Sistem Online Pemilihan Ketua OSIM <br> MA NU Sunan Giri Prigen</h3>
+                <h3>Sistem Online Pemilihan Ketua OSIM <br> MA NU Sunan Giri Prigen <br> Masa Bhakti {{$site_settings->service_period}}</h3>
                 @if (Auth::check())
-                <a href="{{route('auth.showLogin')}}" class="btn btn-light"><i class="fas fa-fw fa-home"></i> Masuk Ke Dashboard</a>
+                <a href="{{route('user.dashboard')}}" class="btn btn-light"><i class="fas fa-fw fa-home"></i> Masuk Ke Dashboard</a>
                 @else
                 <a href="{{route('auth.showLogin')}}" class="btn btn-light"><i class="fas fa-fw fa-sign-in-alt"></i> Login Sekarang</a>
                 @endif

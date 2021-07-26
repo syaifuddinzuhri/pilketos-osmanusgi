@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CandidateController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\AuthController;
@@ -32,6 +33,9 @@ Route::middleware(['guest'])->group(function () {
 Route::group(['middleware' => ['auth']], function () {
     // Admin Routes
 
+    Route::get('/candidate/visimisi', [HomeController::class, 'visimisi'])->name('candidate.visimisi');
+    Route::get('/candidate/pilih', [HomeController::class, 'pilih'])->name('candidate.pilih');
+    Route::post('/candidate/pilih', [HomeController::class, 'storePilih'])->name('candidate.store.pilih');
     Route::get('/api/chart-vote', [DashboardController::class, 'getChartDataVote'])->name('vote.chart');
 
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:adm']], function () {
@@ -63,6 +67,12 @@ Route::group(['middleware' => ['auth']], function () {
 
         // Master Candidate
         Route::resource('candidate', CandidateController::class);
+
+        // Master Settings
+        Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+        Route::get('/setting/create', [SettingController::class, 'create'])->name('setting.create');
+        Route::put('/setting/update-logo', [SettingController::class, 'updateLogo'])->name('setting.updateLogo');
+        Route::put('/setting/update-data', [SettingController::class, 'updateData'])->name('setting.updateData');
     });
 
     // User Routes

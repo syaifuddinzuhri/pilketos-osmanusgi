@@ -1,6 +1,9 @@
 @extends('user.layouts.main')
 
 @section('title', 'Login')
+@section('footer', 'bg-light text-dark')
+@section('navbar', 'navbar-light bg-light')
+@section('btnlogout', 'btn-outline-danger')
 
 @section('css')
 <style>

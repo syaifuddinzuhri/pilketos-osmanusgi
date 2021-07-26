@@ -8,7 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    @if (is_null($site_settings->logo))
     <link rel="shortcut icon" href="{{asset('img/logo.png')}}" type="image/x-icon">
+    @else
+    <link rel="shortcut icon" href="{{asset('storage/'.$site_settings->logo.'')}}" type="image/x-icon">
+    @endif
+
 
     <title>@yield('title') - Pilketos OSMANUSGI</title>
 

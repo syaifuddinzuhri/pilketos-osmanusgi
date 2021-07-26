@@ -9,7 +9,12 @@
     <title>@yield('title') - Pilketos OSMANUSGI</title>
 
     <!-- Favicon -->
+    @if (is_null($site_settings->logo))
     <link rel="shortcut icon" href="{{asset('img/logo.png')}}" type="image/x-icon">
+    @else
+    <link rel="shortcut icon" href="{{asset('storage/'.$site_settings->logo.'')}}" type="image/x-icon">
+    @endif
+
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -30,11 +35,16 @@
     @include('sweetalert::alert')
 
     {{-- Navbar --}}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+    <nav class="navbar navbar-expand-lg @yield('navbar') shadow">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-bold" href="{{route('home.index')}}">
+                @if (is_null($site_settings->logo))
                 <img src="{{asset('img/logo.png')}}" alt="" width="40" height="40" class="me-2 d-inline-block align-text-top">
                 PILKETOS &nbsp;<span class="d-md-block d-none"> OSMANUSGI</span>
+                @else
+                <img src="{{asset('storage/'.$site_settings->logo.'')}}" alt="" width="40" height="40" class="me-2 d-inline-block align-text-top">
+                PILKETOS &nbsp;<span class="d-md-block d-none"> OSMANUSGI</span>
+                @endif
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,11 +52,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     @if (Auth::check())
+                    @if (Auth::user()->role == 'adm')
                     <li class="nav-item mx-2 my-1">
-                        <a class="nav-link" href="#"><i class="fas fa-fw fa-home"></i> Dashboard</a>
+                        <a class="nav-link active" href="{{route('admin.dashboard')}}"><i class="fas fa-fw fa-home"></i> Dashboard</a>
                     </li>
+                    @else
                     <li class="nav-item mx-2 my-1">
-                        <a class="btn btn-outline-danger w-100" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-fw fa-sign-out-alt"></i> Logout</a>
+                        <a class="nav-link active" href="{{route('user.dashboard')}}"><i class="fas fa-fw fa-home"></i> Dashboard</a>
+                    </li>
+                    @endif
+                    <li class="nav-item mx-2 my-1">
+                        <a class="btn @yield('btnlogout') w-100" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="fas fa-fw fa-sign-out-alt"></i> Logout</a>
 
                     </li>
                     @else

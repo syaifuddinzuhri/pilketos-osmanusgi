@@ -1,6 +1,6 @@
-<footer class="bg-light">
+<footer class="@yield('footer')">
     <div class="container">
-        <div class="row text-dark">
+        <div class="row ">
             <div class="col-12 py-2 text-center">
                 <small>Copyright &copy; 2021. MA NU Sunan Giri Prigen</small>
             </div>
@@ -28,11 +28,18 @@
     </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+    var APP_URL = "{!!  url('/') !!}";
+
+</script>
+
 @yield('script')
 </body>
 </html>

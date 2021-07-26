@@ -4,7 +4,12 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.dashboard')}}">
                 <div class="sidebar-brand-icon">
+                    @if (is_null($site_settings->logo))
                     <img src="{{asset('img/logo.png')}}" width="40" alt="">
+                    @else
+                    <img src="{{asset('storage/'.$site_settings->logo.'')}}" width="40" alt="">
+                    @endif
+
                 </div>
                 <div class="sidebar-brand-text mx-3">PILKETOS <br> OSMANUSGI</div>
             </a>
@@ -73,6 +78,12 @@
                 <a class="nav-link" href="{{route('admin.pemilih.index')}}">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Laporan Pemillih</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.setting.index')}}">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Settings</span></a>
             </li>
 
             <!-- Divider -->
