@@ -23,11 +23,14 @@ class TeacherImport implements ToModel, WithHeadingRow, WithChunkReading, Should
             ->orWhere('name', $row['name'])
             ->first();
 
+        $exp = explode('/', $row['date_of_birth']);
+        $date = $exp[0] . '-' . $exp[1] . '-' . $exp[2];
+
         if ($user) {
             $user->update([
                 'nisn' => $row['nisn'],
                 'name' => $row['name'],
-                'date_of_birth' => $row['date_of_birth'],
+                'date_of_birth' => $date,
                 'status' => 'guru',
                 'role' => strtolower($row['role']),
                 'password' => $row['password'],
@@ -37,7 +40,7 @@ class TeacherImport implements ToModel, WithHeadingRow, WithChunkReading, Should
             return new User([
                 'nisn' => $row['nisn'],
                 'name' => $row['name'],
-                'date_of_birth' => $row['date_of_birth'],
+                'date_of_birth' => $date,
                 'status' => 'guru',
                 'role' => strtolower($row['role']),
                 'password' => $row['password'],

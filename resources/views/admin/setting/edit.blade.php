@@ -60,15 +60,25 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <label for="service_period" class="form-label">Mas Bhakti</label>
+                            <label for="service_period" class="form-label">Masa Bhakti</label>
+                            @if (isset($site_settings->service_period))
                             <input type="text" class="form-control @error('service_period') is-invalid @enderror" name="service_period" id="service_period" placeholder="Masukkan masa bhakti" value="{{$data->service_period}}" />
+                            @else
+                            <input type="text" class="form-control @error('service_period') is-invalid @enderror" name="service_period" id="service_period" placeholder="Masukkan masa bhakti" value="{{ old('service_period')}}" />
+
+                            @endif
                             @error('service_period')
                             <span class="invalid-feedback" role="alert">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="guide" class="form-label">Panduan Teknis Pemilihan</label>
+                            @if (isset($site_settings->guide))
                             <textarea class="form-control @error('guide') is-invalid @enderror" name="guide" id="guide" placeholder="Masukkan visi">{{value($data->guide)}}</textarea>
+                            @else
+                            <textarea class="form-control @error('guide') is-invalid @enderror" name="guide" id="guide" placeholder="Masukkan visi">{{old('guide')}}</textarea>
+                            @endif
+
                             @error('guide')
                             <span class="invalid-feedback" role="alert">{{ $message }}</span>
                             @enderror

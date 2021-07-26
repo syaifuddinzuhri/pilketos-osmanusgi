@@ -4,10 +4,10 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.dashboard')}}">
                 <div class="sidebar-brand-icon">
-                    @if (is_null($site_settings->logo))
-                    <img src="{{asset('img/logo.png')}}" width="40" alt="">
-                    @else
+                    @if (isset($site_settings->logo))
                     <img src="{{asset('storage/'.$site_settings->logo.'')}}" width="40" alt="">
+                    @else
+                    <img src="{{asset('img/logo.png')}}" width="40" alt="">
                     @endif
 
                 </div>

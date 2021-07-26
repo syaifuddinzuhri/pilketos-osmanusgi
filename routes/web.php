@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/foo', function () {
+    Artisan::call('db:seed');
+});
+
+Route::get('/clear', function () {
+    Artisan::call('route:cache');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:cache');
+    return true;
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 

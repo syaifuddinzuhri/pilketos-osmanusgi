@@ -9,7 +9,7 @@
     <title>@yield('title') - Pilketos OSMANUSGI</title>
 
     <!-- Favicon -->
-    @if (is_null($site_settings->logo))
+    @if (!isset($site_settings->logo))
     <link rel="shortcut icon" href="{{asset('img/logo.png')}}" type="image/x-icon">
     @else
     <link rel="shortcut icon" href="{{asset('storage/'.$site_settings->logo.'')}}" type="image/x-icon">
@@ -38,11 +38,11 @@
     <nav class="navbar navbar-expand-lg @yield('navbar') shadow">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-bold" href="{{route('home.index')}}">
-                @if (is_null($site_settings->logo))
-                <img src="{{asset('img/logo.png')}}" alt="" width="40" height="40" class="me-2 d-inline-block align-text-top">
+                @if (isset($site_settings->logo))
+                <img src="{{asset('storage/'.$site_settings->logo.'')}}" alt="" width="40" height="40" class="me-2 d-inline-block align-text-top">
                 PILKETOS &nbsp;<span class="d-md-block d-none"> OSMANUSGI</span>
                 @else
-                <img src="{{asset('storage/'.$site_settings->logo.'')}}" alt="" width="40" height="40" class="me-2 d-inline-block align-text-top">
+                <img src="{{asset('img/logo.png')}}" alt="" width="40" height="40" class="me-2 d-inline-block align-text-top">
                 PILKETOS &nbsp;<span class="d-md-block d-none"> OSMANUSGI</span>
                 @endif
             </a>

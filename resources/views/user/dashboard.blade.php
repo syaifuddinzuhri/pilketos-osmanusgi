@@ -32,10 +32,14 @@
                 <div class="alert alert-primary" role="alert">
                     <h4>Halo, <strong>{{Auth::user()->name}}</strong></h4>
                     <h4>Selamat datang di Sistem Online Pemilihan Ketua OSIM MA NU Sunan Giri Prigen</h4>
-                    <h4>Masa Bhakti {{$site_settings->service_period}}</h4>
+                    <h4>Masa Bhakti {{isset($site_settings->service_period) ? $site_settings->service_period : ''}}</h4>
                     <hr>
                     <p class="mb-1 font-weight-bold">PANDUAN TEKNIS PEMILIHAN: </p>
+                    @if (isset($site_settings->guide))
                     <p class="m-0">{!! $site_settings->guide !!}</p>
+                    @else
+                    <p class="m-0">Panduan kosong</p>
+                    @endif
                 </div>
                 <hr>
             </div>

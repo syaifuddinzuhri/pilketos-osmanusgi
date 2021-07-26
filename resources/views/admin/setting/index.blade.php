@@ -21,10 +21,10 @@
                     <h5 class="m-0 card-title">Logo Aplikasi</h5>
                 </div>
                 <div class="card-body">
-                    @if (is_null($data->logo))
-                    <img src="{{asset('img/logo.png')}}" class="img-thumbnail img-responsive w-100" alt="">
-                    @else
+                    @if (isset($data->logo))
                     <img src="{{asset('storage/'.$data->logo.'')}}" class="img-thumbnail img-responsive w-100" alt="">
+                    @else
+                    <img src="{{asset('img/logo.png')}}" class="img-thumbnail img-responsive w-100" alt="">
                     @endif
                 </div>
             </div>
@@ -39,13 +39,13 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-md-4 font-weight-bold">Masa Bhakti</div>
-                                <div class="col-md-8">{{$data->service_period }}</div>
+                                <div class="col-md-8">{{ isset($data->service_period) ? $data->service_period : '' }}</div>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-md-4 font-weight-bold">Panduan Teknis</div>
-                                <div class="col-md-8">{!! $data->guide !!}</div>
+                                <div class="col-md-8">{!! isset($data->guide) ? $data->guide : '' !!}</div>
                             </div>
                         </li>
                     </ul>
