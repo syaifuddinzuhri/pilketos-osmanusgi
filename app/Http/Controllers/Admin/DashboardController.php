@@ -54,6 +54,19 @@ class DashboardController extends Controller
     public function pemilih(Request $request)
     {
         $data = Vote::with('user', 'candidate')->get();
+        $siswa_x = Vote::whereHas('user', function ($q) {
+            $q->where(['status' => 'siswa', 'class' => 'X']);
+        })->get()->count();
+        $siswa_xi = Vote::whereHas('user', function ($q) {
+            $q->where(['status' => 'siswa', 'class' => 'XI']);
+        })->get()->count();
+        $siswa_xii = Vote::whereHas('user', function ($q) {
+            $q->where(['status' => 'siswa', 'class' => 'XII']);
+        })->get()->count();
+        $guru = Vote::whereHas('user', function ($q) {
+            $q->where(['status' => 'guru']);
+        })->get()->count();
+
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -66,13 +79,20 @@ class DashboardController extends Controller
                 ->editColumn('candidate', function ($row) {
                     return $row->candidate->user->name;
                 })
-                ->editColumn('order', function ($row) {
-                    return '<span class="badge badge-primary p-2">' . $row->candidate->order . '</span>';
+                ->editColumn('class', function ($row) {
+                    return $row->user->class . ' ' . $row->user->major;
                 })
-                ->rawColumns(['action', 'candidate', 'order'])
+                ->editColumn('status', function ($row) {
+                    return $row->user->status === 'siswa' ? '<span class="badge badge-primary">Siswa</span>' :
+                        '<span class="badge badge-success">Guru</span>';
+                })
+                ->editColumn('order', function ($row) {
+                    return '<span class="badge badge-info p-2">' . $row->candidate->order . '</span>';
+                })
+                ->rawColumns(['action', 'candidate', 'order', 'class', 'status'])
                 ->make(true);
         }
-        return view('admin.pemilih.index', compact('data'));
+        return view('admin.pemilih.index', compact('data', 'siswa_x', 'siswa_xi', 'siswa_xii', 'guru'));
     }
 
     public function destroyPemilih($id)

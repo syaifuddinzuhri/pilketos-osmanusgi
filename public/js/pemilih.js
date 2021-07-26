@@ -9,9 +9,9 @@ $(function () {
         }, columns: [
             { data: "DT_RowIndex", name: "DT_RowIndex", className: "text-center", width: "4%", },
             { data: "user.nisn", name: "user.nisn" },
+            { data: "status", name: "status" },
             { data: "user.name", name: "user.name" },
-            { data: "user.class", name: "user.class" },
-            { data: "user.major", name: "user.major" },
+            { data: "class", name: "class" },
             { data: "candidate", name: "candidate" },
             { data: "order", name: "order" },
             { data: "action", name: "action", orderable: false, searchable: false, }
