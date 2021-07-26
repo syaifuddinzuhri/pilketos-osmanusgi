@@ -9,7 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+      @if (isset($site_settings->logo))
+      <link rel="shortcut icon" href="{{asset('storage/'.$site_settings->logo.'')}}" type="image/x-icon">
+      @else
+      <link rel="shortcut icon" href="{{asset('img/logo.png')}}" type="image/x-icon">
+      @endif
+
+      <title>Login Admin - Pilketos OSMANUSGI</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('templates')}}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,6 +29,7 @@
         .bg-login-image {
             background-image: url({{asset('img/ma.jpg')}})
         }
+
     </style>
 
 </head>

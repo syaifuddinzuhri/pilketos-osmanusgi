@@ -21,18 +21,6 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Route::get('/foo', function () {
-    Artisan::call('db:seed');
-});
-
-Route::get('/clear', function () {
-    Artisan::call('route:cache');
-    Artisan::call('cache:clear');
-    Artisan::call('view:clear');
-    Artisan::call('config:cache');
-    return true;
-});
-
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::middleware(['guest'])->group(function () {
@@ -94,4 +82,17 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+});
+
+Route::get('/seed', function () {
+    Artisan::call('db:seed');
+    return true;
+});
+
+Route::get('/clear', function () {
+    Artisan::call('route:cache');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:cache');
+    return true;
 });
