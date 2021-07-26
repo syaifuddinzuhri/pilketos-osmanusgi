@@ -70,15 +70,15 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{route('admin.pemilih.index')}}">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Data Pemillih</span></a>
+                    <span>Laporan Pemillih</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Grafik Voting</span></a>
+                    <span>Laporan Grafik</span></a>
             </li>
 
             <!-- Divider -->

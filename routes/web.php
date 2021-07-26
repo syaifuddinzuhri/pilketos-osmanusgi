@@ -37,6 +37,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
         Route::put('/update/{id}', [AuthController::class, 'update'])->name('auth.update');
 
+        // Master Pemilih
+        Route::get('/pemilih', [DashboardController::class, 'pemilih'])->name('pemilih.index');
+        Route::delete('/pemilih/{id}', [DashboardController::class, 'destroyPemilih'])->name('pemilih.destroy');
+
         // Master Admin
         // Route::get('/master/export', [AdminController::class, 'export'])->name('master.export');
         // Route::post('/master/import', [AdminController::class, 'import'])->name('master.import');
