@@ -75,12 +75,6 @@
                     <span>Laporan Pemillih</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Laporan Grafik</span></a>
-            </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

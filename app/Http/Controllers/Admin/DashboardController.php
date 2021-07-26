@@ -7,6 +7,7 @@ use App\Models\Candidate;
 use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class DashboardController extends Controller
@@ -18,9 +19,36 @@ class DashboardController extends Controller
         $siswa_xi = User::where(['status' => 'siswa', 'class' => 'XI'])->get()->count();
         $siswa_xii = User::where(['status' => 'siswa', 'class' => 'XII'])->get()->count();
         $guru = User::where(['status' => 'guru'])->get()->count();
-        $kandidat = Candidate::get()->count();
         $pemilih = Vote::get()->count();
-        return view('admin.dashboard.index', compact('siswa', 'guru', 'pemilih', 'kandidat', 'siswa_x', 'siswa_xi', 'siswa_xii'));
+        $kandidat = Candidate::get()->count();
+
+        $data_candidate = Candidate::select('users.name')
+            ->join('users', 'users.id', '=', 'candidates.user_id')
+            ->groupBy('users.name')
+            ->pluck('users.name');
+
+        $data_pemilih = Vote::select(DB::raw('count(*) as total'))
+            ->join('candidates', 'candidates.id', '=', 'votes.candidate_id')
+            ->groupBy('candidates.id')
+            ->pluck('total');
+
+        return view('admin.dashboard.index', compact('data_candidate', 'data_pemilih', 'siswa', 'guru', 'pemilih', 'kandidat', 'siswa_x', 'siswa_xi', 'siswa_xii'));
+    }
+
+    public function getChartDataVote()
+    {
+        $kandidat = Candidate::get()->count();
+
+        $data_candidate = Candidate::select('users.name')
+            ->join('users', 'users.id', '=', 'candidates.user_id')
+            ->groupBy('users.name')
+            ->pluck('users.name');
+
+        $data_pemilih = Vote::select(DB::raw('count(*) as total'))
+            ->join('candidates', 'candidates.id', '=', 'votes.candidate_id')
+            ->groupBy('candidates.id')
+            ->pluck('total');
+        return response()->json(compact('kandidat', 'data_candidate', 'data_pemilih'), 200);
     }
 
     public function pemilih(Request $request)

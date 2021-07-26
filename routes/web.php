@@ -29,6 +29,9 @@ Route::middleware(['guest'])->group(function () {
 
 Route::group(['middleware' => ['auth']], function () {
     // Admin Routes
+
+    Route::get('/api/chart-vote', [DashboardController::class, 'getChartDataVote'])->name('vote.chart');
+
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['role:adm']], function () {
         Route::get('/', function () {
             return redirect()->route('admin.dashboard');
