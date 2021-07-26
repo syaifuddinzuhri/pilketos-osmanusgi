@@ -82,13 +82,13 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-md-2 font-weight-bold">Visi</div>
-                                <div class="col-md-10">{{$data->vision}}</div>
+                                <div class="col-md-10">{!! $data->vision !!}</div>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-md-2 font-weight-bold">Misi</div>
-                                <div class="col-md-10">{{$data->mision}}</div>
+                                <div class="col-md-10">{!! $data->mision !!}</div>
                             </div>
                         </li>
                     </ul>

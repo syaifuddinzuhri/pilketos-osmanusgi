@@ -5,6 +5,7 @@
 @section('css')
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="{{asset('vendor/bootstrap-select')}}/dist/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="{{asset('vendor/summernote/summernote-bs4.css')}}">
 @endsection
 
 @section('content')
@@ -107,22 +108,52 @@
 
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 <script src="{{asset('vendor/bootstrap-select')}}/dist/js/i18n/defaults-*.min.js"></script>
-
+<script src="{{asset('vendor/summernote/summernote-bs4.min.js')}}"></script>
 
 <script>
-    $("#photo").on("change", function(e) {
-        e.preventDefault();
-        if (this.files && this.files[0]) {
-            var name = this.files[0]["name"];
-            $("form label[for='photoInput']").text(name);
-            var reader = new FileReader();
-            reader.onload = (e) => {
-                $("#preview-photo").css("display", 'block');
-                $("#preview-photo").attr("src", e.target.result);
-            };
-            reader.readAsDataURL(this.files[0]);
-        }
+    $(document).ready(function() {
+        $("#photo").on("change", function(e) {
+            e.preventDefault();
+            if (this.files && this.files[0]) {
+                var name = this.files[0]["name"];
+                $("form label[for='photoInput']").text(name);
+                var reader = new FileReader();
+                reader.onload = (e) => {
+                    $("#preview-photo").css("display", 'block');
+                    $("#preview-photo").attr("src", e.target.result);
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        $('#mision').summernote({
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']]
+                , ['font', ['strikethrough', 'superscript', 'subscript']]
+                , ['color', ['color']]
+                , ['para', ['ul', 'ol', 'paragraph']]
+                , ['height', ['height']]
+                , ['insert', ['link']]
+            , ]
+            , placeholder: 'Masukkan misi'
+            , tabsize: 2
+            , height: 100
+        });
+        $('#vision').summernote({
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']]
+                , ['font', ['strikethrough', 'superscript', 'subscript']]
+                , ['color', ['color']]
+                , ['para', ['ul', 'ol', 'paragraph']]
+                , ['height', ['height']]
+                , ['insert', ['link']]
+            , ]
+            , placeholder: 'Masukkan visi'
+            , tabsize: 2
+            , height: 100
+        });
     });
 
 </script>
+
 @endsection
