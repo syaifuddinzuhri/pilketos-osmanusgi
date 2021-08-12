@@ -91,6 +91,12 @@
                                 <div class="col-md-10">{!! $data->mision !!}</div>
                             </div>
                         </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-2 font-weight-bold">Link Youtube</div>
+                                <div class="col-md-10">{{ $data->youtube }}</div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

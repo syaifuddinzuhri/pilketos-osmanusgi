@@ -73,6 +73,14 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="youtube" class="form-label">Link Youtube</label>
+                            <input type="text" class="form-control @error('youtube') is-invalid @enderror" name="youtube" id="youtube" min="1" placeholder="Masukkan link youtube" value="{{$data->youtube}}" />
+                            @error('youtube')
+                            <span class="invalid-feedback" role="alert">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
                             <div class="form-group">
                                 <label for="photo">Foto</label>
                                 <div class="custom-file">

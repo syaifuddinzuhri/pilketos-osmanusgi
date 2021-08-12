@@ -17,6 +17,7 @@ class Candidate extends Model
         'order',
         'vision',
         'mision',
+        'youtube',
         'photo',
     ];
 
